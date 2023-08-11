@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "518736633982",
+    "project_id": "location-track-8045d",
+    "storage_bucket": "location-track-8045d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518736633982:android:4e719f6774c041ff69382f",
+        "android_client_info": {
+          "package_name": "com.example.ulab_bus_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518736633982-fpo82sdnu7k7edd0j7c48b60gdll3oqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvNOblBw4B6QcseQQbfjdgyADGz4RFbsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518736633982-fpo82sdnu7k7edd0j7c48b60gdll3oqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
