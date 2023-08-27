@@ -1,6 +1,6 @@
-# ulab_bus_tracker
+# ulab_shuttle_bustracker
 
-A new Flutter project.
+Shuttle bus tracking of ULAB.
 
 ## Getting Started
 

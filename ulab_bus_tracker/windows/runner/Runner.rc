@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ulab_bus_tracker" "\0"
+            VALUE "FileDescription", "ulab_shuttle_bustracker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ulab_bus_tracker" "\0"
+            VALUE "InternalName", "ulab_shuttle_bustracker" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ulab_bus_tracker.exe" "\0"
-            VALUE "ProductName", "ulab_bus_tracker" "\0"
+            VALUE "OriginalFilename", "ulab_shuttle_bustracker.exe" "\0"
+            VALUE "ProductName", "ulab_shuttle_bustracker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,5 +1,5 @@
-name: ulab_bus_tracker
-description: A new Flutter project.
+name: ulab_shuttle_bustracker
+description: Shuttle bus tracking of ULAB.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -46,6 +46,11 @@ dependencies:
   cloud_firestore: ^4.8.4
   firebase_core: ^2.15.0
   firebase_database: ^10.2.4
+  email_validator: ^2.1.17
+  google_map_polyline_new: ^0.3.0+2
+
+
+
 
 
 dev_dependencies:
@@ -71,7 +76,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+     - images/
+     - images/uni_pic.jpg
+     - images/lovepik-bus.PNG
+     - images/google_logo.png
+    #   - images/a_dot_ham.jpeg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

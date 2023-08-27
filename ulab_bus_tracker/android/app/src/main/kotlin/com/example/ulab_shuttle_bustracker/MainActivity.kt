@@ -1,4 +1,4 @@
-package com.example.ulab_bus_tracker
+package com.example.ulab_shuttle_bustracker
 
 import io.flutter.embedding.android.FlutterActivity
 

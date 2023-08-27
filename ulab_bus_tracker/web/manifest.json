@@ -1,11 +1,11 @@
 {
-    "name": "ulab_bus_tracker",
-    "short_name": "ulab_bus_tracker",
+    "name": "ulab_shuttle_bustracker",
+    "short_name": "ulab_shuttle_bustracker",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Shuttle bus tracking of ULAB.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

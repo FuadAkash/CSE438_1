@@ -21,6 +21,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
+Future<Marker> createDriverMarker(LatLng driverLocation) async {
+  final BitmapDescriptor icon = await BitmapDescriptor.fromAssetImage(
+    const ImageConfiguration(devicePixelRatio: 1.0),
+    'images/party-bus.png',
+  );
+
+  Marker marker = Marker(
+    markerId: const MarkerId('Bus'),
+    position: driverLocation,
+    icon: icon,
+  );
+
+  return marker;
+}
+
 class BusTrackingScreen extends StatefulWidget {
   @override
   _BusTrackingScreenState createState() => _BusTrackingScreenState();
@@ -30,19 +45,17 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late GoogleMapController _mapController; // Define the map controller
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  LatLng driverLocation = LatLng(23.8041, 90.4152); // Initialize with a default value
-
+  LatLng driverLocation =
+      LatLng(23.8041, 90.4152); // Initialize with a default value
 
   late Timer _locationTimer;
-  final Duration _locationUpdateInterval = const Duration(seconds: 3); // Update interval
-  String username = ''; // Initialize username
+  final Duration _locationUpdateInterval =
+      const Duration(seconds: 3); // Update interval
 
   @override
   void initState() {
     super.initState();
-    _fetchUsernameFromFirestore();
     _startLocationUpdates();
-
   }
 
   void _startLocationUpdates() {
@@ -53,7 +66,6 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
 
   late double latitude = 23.8041; // Default value
   late double longitude = 90.4152; // Default value
-
 
   Future<void> getCurrentLocation() async {
     bool serviceEnabled;
@@ -76,7 +88,7 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
       }
     }
     Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.best,
+      desiredAccuracy: LocationAccuracy.bestForNavigation,
     );
     latitude = position.latitude;
     longitude = position.longitude;
@@ -91,66 +103,75 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
       if (user != null) {
         getCurrentLocation();
 
-        await _firestore
-            .collection('DriverLocations')
-            .doc(user.uid)
-            .set({
-          'location': GeoPoint(latitude, longitude),
-          'email': user.email, // Add the user email
-        });
-        print('Driver location sent to Realtime Database: $latitude, $longitude');
+        DocumentReference locationRef =
+            _firestore.collection('DriverLocations').doc(user.uid);
+
+        DocumentSnapshot locationDoc = await locationRef.get();
+
+        if (locationDoc.exists) {
+          // Document exists, update its fields
+          await locationRef.update({
+            'location': GeoPoint(latitude, longitude),
+            'email': user
+                .email, // Assuming you have busno property in your user object
+          });
+
+          print("Collection found, updating data");
+        } else {
+          // Document doesn't exist, create it
+          await locationRef.set({
+            'location': GeoPoint(latitude, longitude),
+            'email': user.email,
+          });
+          print("Collection not found, setting new collection");
+        }
+
+        print(
+            'Driver location sent to Realtime Database: $latitude, $longitude');
       }
     } catch (e) {
       print('Error sending driver location: $e');
     }
   }
 
+  Set<Marker> _markers = {};
 
-  @override
-  void dispose() {
-    _locationTimer?.cancel();
-    super.dispose();
-  }
-
-
-
-  Future<void> _fetchUsernameFromFirestore() async {
-    final user = _auth.currentUser;
-    if (user != null) {
-      final userId = user.uid;
-      final userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
-      if (userDoc.exists) {
-        setState(() {
-          username = user.displayName ?? ''; // Use the display name from Google Sign-In
-        });
-      }
+  void _moveCameraToDriverLocation() {
+    if (_mapController != null) {
+      _mapController!.animateCamera(
+        CameraUpdate.newLatLngZoom(driverLocation, 14.0),
+      );
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
+    createDriverMarker(driverLocation).then((marker) {
+      setState(() {
+        _markers.add(marker);
+      });
+    });
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bus Tracking - $username"), // Include the username in the title
+        title: Text("Driver Home Page"),
+        backgroundColor: Colors.black87,
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: driverLocation,
           zoom: 14,
         ),
-        markers: {
-          Marker(
-            markerId: MarkerId("driver - $username"),
-            position: driverLocation,
-            infoWindow: InfoWindow(title: "Driver's Location"),
-          ),
-        },
+        markers: _markers,
         onMapCreated: (controller) {
           _mapController = controller;
         },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: _moveCameraToDriverLocation,
+        child: Icon(Icons.location_searching),
+        backgroundColor: Colors.deepOrange,
+      ),
     );
   }
-
 }

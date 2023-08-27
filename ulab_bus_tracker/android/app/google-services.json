@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "518736633982",
-    "project_id": "location-track-8045d",
-    "storage_bucket": "location-track-8045d.appspot.com"
+    "project_number": "176080339440",
+    "project_id": "navigation-9f0be",
+    "storage_bucket": "navigation-9f0be.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:518736633982:android:4e719f6774c041ff69382f",
+        "mobilesdk_app_id": "1:176080339440:android:11282096bc4dd962f75d35",
         "android_client_info": {
-          "package_name": "com.example.ulab_bus_tracker"
+          "package_name": "com.example.ulab_shuttle_bustracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "518736633982-fpo82sdnu7k7edd0j7c48b60gdll3oqq.apps.googleusercontent.com",
+          "client_id": "176080339440-5hktf2bkvb3535ab43d4n7q0vdrfkqdm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDvNOblBw4B6QcseQQbfjdgyADGz4RFbsM"
+          "current_key": "AIzaSyBHZS3nQ1Bt8MQLhDiaq1PKgzjaCaDGqqo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "518736633982-fpo82sdnu7k7edd0j7c48b60gdll3oqq.apps.googleusercontent.com",
+              "client_id": "176080339440-5hktf2bkvb3535ab43d4n7q0vdrfkqdm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
